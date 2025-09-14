@@ -1,0 +1,62 @@
+
+
+
+  
+  
+  صفحه ورود / ثبت‌نام
+  
+
+
+  
+    خوش‌آمدید — وارد شوید
+<label for="loginUser">نام کاربری</label>
+<input id="loginUser" type="text" placeholder="username" autocomplete="username">
+
+<label for="loginPass">رمز عبور</label>
+<input id="loginPass" type="password" placeholder="password" autocomplete="current-password">
+
+<div class="actions">
+  <button class="btn-primary" id="btnLogin">ورود</button>
+  <button class="btn-ghost" id="btnClear">پاک کن</button>
+</div>
+
+<div class="message" id="loginMsg"></div>
+
+<div class="register-link" id="openRegister">ثبت‌نام</div>
+
+  
+  
+  
+    
+      
+        فرم ثبت‌نام
+        ✖
+      
+  <label for="regPhone">شماره تلفن</label>
+  <input id="regPhone" type="tel" placeholder="مثال: 0912..." autocomplete="tel">
+
+  <label for="regEmail">ایمیل</label>
+  <input id="regEmail" type="email" placeholder="you@example.com" autocomplete="email">
+
+  <label for="regLicense">کد لایسنس</label>
+  <input id="regLicense" type="text" placeholder="کد لایسنس" autocomplete="off">
+  <div class="small">توجه: فقط اگر کد لایسنس شما <strong>911</strong> باشد ثبت‌نام امکان‌پذیر است.</div>
+
+  <label for="regUser">نام کاربری</label>
+  <input id="regUser" type="text" placeholder="username" autocomplete="username">
+
+  <label for="regPass">رمز عبور</label>
+  <input id="regPass" type="password" placeholder="password" autocomplete="new-password">
+
+  <div class="actions" style="margin-top:14px">
+    <button class="btn-primary" id="btnRegister">ثبت‌نام</button>
+    <button class="btn-ghost" id="btnCancel">انصراف</button>
+  </div>
+
+  <div class="message" id="regMsg"></div>
+</div>
+
+  
+  
+
+
