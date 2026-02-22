@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>باند بنفش | Crime Roleplay Mafia</title>
+    <!-- فونت‌های فارسی و آیکون -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Vazirmatn', sans-serif;
+            background: #0a0a0f;
+            color: #e0e0ff;
+            line-height: 1.6;
+            overflow-x: hidden;
+            perspective: 1px;
+            transform-style: preserve-3d;
+        }
+
+        /* افکت سه‌بعدی پارالاکس */
+        .parallax-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 120%;
+            background: radial-gradient(circle at 20% 30%, #2e1a47, #0b0b14 70%);
+            transform: translateZ(-1px) scale(2);
+            z-index: -2;
+        }
+
+        .grid-3d {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(106, 13, 173, 0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(106, 13, 173, 0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+            transform: rotateX(60deg) translateZ(-50px) scale(2);
+            transform-origin: top;
+            z-index: -1;
+            opacity: 0.3;
+            animation: gridMove 20s linear infinite;
+        }
+
+        @keyframes gridMove {
+            0% { background-position: 0 0; }
+            100% { background-position: 0 100px; }
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+            transform-style: preserve-3d;
+        }
+
+        /* هدر با افکت شیشه ای 3D */
+        .glass-header {
+            background: rgba(20, 5, 30, 0.7);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(138, 43, 226, 0.3);
+            border-radius: 30px;
+            padding: 15px 30px;
+            margin: 20px 0 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 25px 40px -10px rgba(106, 13, 173, 0.5), 0 0 0 1px rgba(180, 130, 255, 0.2) inset;
+            transform: translateZ(20px) translateY(-10px);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .glass-header:hover {
+            transform: translateZ(30px) translateY(-15px);
+            box-shadow: 0 35px 50px -5px #6a0dad;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo-icon {
+            font-size: 3rem;
+            color: #b87cff;
+            filter: drop-shadow(0 0 15px #9f4bff);
+            transform: rotateY(10deg) rotateX(5deg);
+        }
+
+        .logo h1 {
+            font-size: 2rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, #d9b0ff, #9b4dff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 30px #8a4df0;
+            letter-spacing: 2px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 25px;
+        }
+
+        .nav-item {
+            color: #ccccee;
+            text-decoration: none;
+            font-weight: 600;
+            padding: 8px 18px;
+            border-radius: 40px;
+            background: rgba(30, 10, 40, 0.6);
+            border: 1px solid rgba(170, 0, 255, 0.3);
+            backdrop-filter: blur(5px);
+            transition: all 0.2s;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .nav-item i {
+            color: #b77eff;
+        }
+
+        .nav-item:hover {
+            background: #6a0dad;
+            border-color: #f0b5ff;
+            box-shadow: 0 0 25px #b300ff;
+            transform: translateY(-3px) scale(1.05);
+            color: white;
+        }
+
+        /* بخش قهرمان با کارت 3D خفن */
+        .hero-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 80px;
+            transform-style: preserve-3d;
+        }
+
+        .hero-text {
+            flex: 1;
+            transform: translateZ(25px);
+        }
+
+        .hero-text h2 {
+            font-size: 4rem;
+            font-weight: 900;
+            line-height: 1.2;
+            background: linear-gradient(120deg, #f5e6ff, #b27aff, #6f4dff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 50px #a020f0;
+            margin-bottom: 20px;
+        }
+
+        .hero-text p {
+            font-size: 1.3rem;
+            color: #cbcbe0;
+            margin-bottom: 30px;
+            max-width: 600px;
+        }
+
+        .hero-3d-card {
+            flex: 1;
+            background: rgba(30, 10, 45, 0.5);
+            border-radius: 40px;
+            padding: 40px;
+            border: 2px solid rgba(180, 0, 255, 0.6);
+            transform: rotateY(-5deg) rotateX(5deg) translateZ(50px);
+            box-shadow: 30px 30px 50px rgba(0, 0, 0, 0.8), -10px -10px 30px rgba(180, 0, 255, 0.2) inset;
+            backdrop-filter: blur(12px);
+            transition: 0.4s;
+        }
+
+        .hero-3d-card:hover {
+            transform: rotateY(-3deg) rotateX(3deg) translateZ(70px) scale(1.02);
+            box-shadow: 40px 40px 70px black, 0 0 50px #a44eff;
+        }
+
+        .stat-badge {
+            display: flex;
+            gap: 30px;
+        }
+
+        .badge {
+            background: #1e102e;
+            padding: 20px;
+            border-radius: 30px;
+            border: 1px solid #b56eff;
+            text-align: center;
+            flex: 1;
+        }
+
+        .badge i {
+            font-size: 2.5rem;
+            color: #c68eff;
+        }
+
+        /* بخش لیست اعضا با کارت‌های سه‌بعدی */
+        .section-title {
+            font-size: 2.8rem;
+            font-weight: 800;
+            margin: 60px 0 30px;
+            position: relative;
+            display: inline-block;
+            text-shadow: 0 0 20px #9013fe;
+            border-right: 8px solid #aa4dff;
+            padding-right: 25px;
+        }
+
+        .member-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .member-card {
+            background: rgba(25, 10, 35, 0.8);
+            backdrop-filter: blur(10px);
+            border: 1px solid #7a3fb0;
+            border-radius: 40px;
+            padding: 25px 15px;
+            text-align: center;
+            transform: rotateY(0deg) rotateX(0deg) translateZ(15px);
+            transition: all 0.3s;
+            box-shadow: 0 20px 30px -15px black;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .member-card::before {
+            content: '';
+            position: absolute;
+            top: -2px; left: -2px; right: -2px; bottom: -2px;
+            background: linear-gradient(45deg, #6f4dff, #ff00c3, #6f4dff);
+            border-radius: 40px;
+            z-index: -2;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .member-card:hover::before {
+            opacity: 0.8;
+        }
+
+        .member-card:hover {
+            transform: rotateY(5deg) rotateX(5deg) translateZ(40px) scale(1.05);
+            box-shadow: 0 30px 50px #a759ff;
+        }
+
+        .member-avatar {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 20px;
+            background: linear-gradient(145deg, #28243d, #120b1f);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3.5rem;
+            border: 3px solid #ac6bff;
+            box-shadow: 0 0 50px #9147ff;
+        }
+
+        .online {
+            color: #22ff7e;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+        }
+
+        .offline {
+            color: #ff5e6b;
+        }
+
+        .rank {
+            background: #3f1e62;
+            padding: 5px 15px;
+            border-radius: 30px;
+            display: inline-block;
+            margin: 15px 0 5px;
+            font-weight: 700;
+        }
+
+        /* بخش فروشگاه سلاح و weed */
+        .shop-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 25px;
+            margin-bottom: 50px;
+        }
+
+        .product-card {
+            background: #140d1e;
+            border: 2px solid #7d41c9;
+            border-radius: 35px;
+            padding: 25px 15px;
+            text-align: center;
+            transform: translateZ(10px) rotateY(2deg);
+            transition: 0.2s;
+            box-shadow: 0 0 0 2px rgba(191, 64, 255, 0.2);
+        }
+
+        .product-card:hover {
+            transform: translateZ(30px) scale(1.02);
+            border-color: #c97aff;
+            box-shadow: 0 0 70px #ae4eff;
+        }
+
+        .product-icon {
+            font-size: 5rem;
+            filter: drop-shadow(0 0 30px #ad45ff);
+            margin-bottom: 20px;
+        }
+
+        .price {
+            font-size: 1.8rem;
+            color: #ffb8ff;
+            font-weight: 800;
+        }
+
+        .weed-tag {
+            background: #36004e;
+            border-radius: 30px;
+            padding: 10px;
+            margin-top: 15px;
+            border: 1px dashed #cd8cff;
+        }
+
+        /* مکان‌های نقش‌پردازی (HQ) */
+        .locations {
+            display: flex;
+            gap: 25px;
+            flex-wrap: wrap;
+            margin-bottom: 70px;
+        }
+
+        .location-item {
+            background: #1f1233;
+            border-radius: 30px;
+            padding: 30px;
+            flex: 1 1 200px;
+            border: 1px solid #a066cc;
+            transform: rotateX(2deg) rotateY(-2deg);
+            backdrop-filter: blur(5px);
+            transition: 0.3s;
+        }
+
+        .location-item:hover {
+            transform: rotateX(0) rotateY(0) scale(1.05);
+            background: #2b1647;
+            border-color: #e68aff;
+        }
+
+        /* بخش قوانین و نوت */
+        .rules-note {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 30px;
+            margin: 60px 0;
+        }
+
+        .rules-box, .note-box {
+            background: rgba(16, 6, 26, 0.8);
+            backdrop-filter: blur(12px);
+            border: 2px solid #a748ff;
+            border-radius: 50px;
+            padding: 35px;
+            box-shadow: 0 40px 60px -20px black;
+            transform: translateZ(20px);
+        }
+
+        .rules-box ul {
+            list-style: none;
+        }
+
+        .rules-box li {
+            margin: 20px 0;
+            font-size: 1.2rem;
+            border-bottom: 1px solid #4a2a69;
+            padding-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .note-box textarea {
+            width: 100%;
+            background: #1a0d28;
+            border: 2px solid #ac6eff;
+            border-radius: 30px;
+            padding: 20px;
+            color: white;
+            font-size: 1.1rem;
+            margin-top: 20px;
+        }
+
+        .fol {
+            background: #34004b;
+            text-align: center;
+            padding: 30px;
+            border-radius: 120px;
+            margin: 50px 0;
+            font-size: 2rem;
+            font-weight: bold;
+            border: 4px solid #c67dff;
+            box-shadow: 0 0 70px #b95eff;
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px;
+            background: rgba(20, 5, 30, 0.6);
+            border-radius: 70px 70px 20px 20px;
+            margin-top: 50px;
+            border-top: 3px solid #ad49ff;
+        }
+
+        /* جاوااسکریپت برای پویانمایی بیشتر و فوتر */
+        .btn-neon {
+            background: transparent;
+            border: 2px solid #b45eff;
+            padding: 12px 40px;
+            border-radius: 60px;
+            color: #e8b5ff;
+            font-weight: bold;
+            font-size: 1.3rem;
+            cursor: pointer;
+            transition: 0.2s;
+            box-shadow: 0 0 20px #aa44ff;
+        }
+
+        .btn-neon:hover {
+            background: #a250ff;
+            color: black;
+            box-shadow: 0 0 60px #f0b1ff;
+            transform: scale(1.1);
+        }
+
+        /* وضعیت آنلاین و آفلاین */
+        .status-toggle {
+            margin: 30px 0;
+            display: flex;
+            gap: 30px;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="parallax-bg"></div>
+    <div class="grid-3d"></div>
+
+    <div class="container">
+        <!-- هدر 3D -->
+        <header class="glass-header">
+            <div class="logo">
+                <i class="fas fa-skull logo-icon"></i>
+                <h1>باند بنفش</h1>
+            </div>
+            <nav class="nav-links">
+                <a href="#" class="nav-item"><i class="fas fa-home"></i> خانه</a>
+                <a href="#" class="nav-item"><i class="fas fa-users"></i> اعضا</a>
+                <a href="#" class="nav-item"><i class="fas fa-gun"></i> اسلحه</a>
+                <a href="#" class="nav-item"><i class="fas fa-cannabis"></i> Weed</a>
+                <a href="#" class="nav-item"><i class="fas fa-map"></i> نقشه</a>
+                <a href="#" class="nav-item"><i class="fas fa-book"></i> قوانین</a>
+            </nav>
+        </header>
+
+        <!-- بخش Hero با کارت سه‌بعدی -->
+        <section class="hero-section">
+            <div class="hero-text">
+                <h2>امپراتوری<br>جنایت & نقش‌پردازی</h2>
+                <p>به بزرگترین باند خیابانی با دیزاین سه‌بعدی بنفش بپیوندید. جنگ، قدرت، ثروت و وی‌آی‌پی ترین نقش‌ها.</p>
+                <div class="stat-badge">
+                    <div class="badge"><i class="fas fa-user-secret"></i> ۲۴ عضو حرفه‌ای</div>
+                    <div class="badge"><i class="fas fa-map-marker-alt"></i> ۱۲ HQ مخفی</div>
+                </div>
+            </div>
+            <div class="hero-3d-card">
+                <i class="fas fa-crown" style="font-size:4rem; color: #d9a2ff;"></i>
+                <h3 style="font-size:2rem;">Mafia Purple</h3>
+                <p>عضو ویژه شو و ۱۰۰۰ دلار درون‌بازی جایزه بگیر</p>
+                <button class="btn-neon"><i class="fas fa-hand-fist"></i> عضویت فوری</button>
+            </div>
+        </section>
+
+        <!-- لیست اعضا (Member List) با وضعیت آنلاین/آفلاین -->
+        <h2 class="section-title"><i class="fas fa-user-group"></i> لیست اعضا (آنلاین‌ها بنفش)</h2>
+        <div class="status-toggle" id="memberStatusToggle">
+            <span class="online"><i class="fas fa-circle"></i> آنلاین (۳)</span>
+            <span class="offline"><i class="fas fa-circle"></i> آفلاین (۴)</span>
+        </div>
+        <div class="member-grid" id="memberGrid">
+            <!-- کارت اعضا با JS پر می‌شود -->
+        </div>
+
+        <!-- فروشگاه سلاح و Weed -->
+        <h2 class="section-title"><i class="fas fa-gun"></i> فروشگاه گرم‌اسلحه & وید</h2>
+        <div class="shop-grid" id="shopContainer">
+            <!-- کارت‌های محصول با JS درون‌ریزی می‌شود -->
+        </div>
+
+        <!-- مکان‌های نقش‌پردازی HQ -->
+        <h2 class="section-title"><i class="fas fa-map-location-dot"></i> مخفیگاه‌های نقش‌پردازی (HQ)</h2>
+        <div class="locations">
+            <div class="location-item"><i class="fas fa-warehouse" style="font-size:3rem;"></i><br>انبار بنفش<br><small>منطقه صنعتی</small></div>
+            <div class="location-item"><i class="fas fa-building" style="font-size:3rem;"></i><br>برج میلاد<br><small>پنت‌هاوس باند</small></div>
+            <div class="location-item"><i class="fas fa-chess-rook" style="font-size:3rem;"></i><br>کازینو رویال<br><small>مرکز پولشویی</small></div>
+            <div class="location-item"><i class="fas fa-joint" style="font-size:3rem;"></i><br>جنگل بنفش<br><small>کشت وید</small></div>
+        </div>
+
+        <!-- بخش قوانین و نوت برد -->
+        <div class="rules-note">
+            <div class="rules-box">
+                <h2><i class="fas fa-scale-balanced"></i> قوانین باند</h2>
+                <ul>
+                    <li><i class="fas fa-skull-crossbones"></i> خیانت = اعدام در نقش‌پردازی</li>
+                    <li><i class="fas fa-handcuffs"></i> عضویت نیاز به تأیید رهبری دارد</li>
+                    <li><i class="fas fa-cannabis"></i> فروش وید فقط در مناطق تعیین‌شده</li>
+                    <li><i class="fas fa-people-group"></i> هر عضو موظف به شرکت در حداقل ۱ نقش در هفته است</li>
+                </ul>
+            </div>
+            <div class="note-box">
+                <h2><i class="fas fa-pen"></i> نوت رهبر</h2>
+                <textarea rows="5" placeholder="یادداشت بنویس... مثلاً: فردا عملیات پاکسازی انبار..." style="background:#1e0d2b;"></textarea>
+                <button class="btn-neon" style="margin-top:20px;"><i class="fas fa-save"></i> ذخیره نوت</button>
+            </div>
+        </div>
+
+        <!-- بخش Fol (فول باکس) -->
+        <div class="fol">
+            <i class="fas fa-crown" style="font-size:4rem;"></i><br>
+            فول باکس اعضای ویژه : ۱۰۰۰ تومان برا همیشه
+        </div>
+
+        <footer>
+            <p>© تمامی حقوق برای باند بنفش محفوظ است - انجمن نقش‌پردازی MTA 2026</p>
+            <p style="color:#ad6eff;"><i class="fab fa-discord"></i> دیسکورد: PurpleMafia | <i class="fab fa-telegram"></i> تلگرام: MafiaRP</p>
+        </footer>
+    </div>
+
+    <!-- جاوااسکریپت پویا برای لیست اعضا و محصولات -->
+    <script>
+        (function() {
+            // داده‌های اعضا
+            const members = [
+                { name: 'KingSlayer', rank: 'رهبر', status: 'online', avatar: '👑' },
+                { name: 'Shadow', rank: 'نایب رئیس', status: 'online', avatar: '🗡️' },
+                { name: 'Phantom', rank: 'قاتل', status: 'offline', avatar: '👻' },
+                { name: 'Violet', rank: 'توزیع‌کننده وید', status: 'online', avatar: '🌿' },
+                { name: 'CriminalMind', rank: 'استراتژیست', status: 'offline', avatar: '🧠' },
+                { name: 'Silencer', rank: 'ضارب', status: 'offline', avatar: '🔫' },
+                { name: 'Neon', rank: 'عضوساده', status: 'online', avatar: '💜' }
+            ];
+
+            const memberGrid = document.getElementById('memberGrid');
+            function renderMembers(filter = 'all') {
+                let html = '';
+                members.forEach(m => {
+                    if (filter === 'online' && m.status !== 'online') return;
+                    if (filter === 'offline' && m.status !== 'offline') return;
+                    html += `
+                        <div class="member-card">
+                            <div class="member-avatar">${m.avatar}</div>
+                            <h3>${m.name}</h3>
+                            <div class="rank">${m.rank}</div>
+                            <div class="${m.status === 'online' ? 'online' : 'offline'}"><i class="fas fa-circle"></i> ${m.status === 'online' ? 'آنلاین' : 'آفلاین'}</div>
+                        </div>
+                    `;
+                });
+                memberGrid.innerHTML = html;
+            }
+            renderMembers('all');
+
+            // فروشگاه
+            const shop = [
+                { name: 'AK-47', price: 550, icon: '🔫', weed: false },
+                { name: ' Desert Eagle', price: 370, icon: '💥', weed: false },
+                { name: 'Purple Haze Weed', price: 120, icon: '🌱', weed: true },
+                { name: 'M4A1-S', price: 720, icon: '⚡', weed: false },
+                { name: 'OG Kush', price: 90, icon: '🍃', weed: true },
+                { name: 'ساچمه‌زن', price: 950, icon: '🔨', weed: false },
+                { name: 'Blue Dream', price: 150, icon: '💨', weed: true },
+                { name: 'گلوله بنفش', price: 40, icon: '🔮', weed: false },
+            ];
+
+            const shopContainer = document.getElementById('shopContainer');
+            function renderShop() {
+                let shopHtml = '';
+                shop.forEach(item => {
+                    shopHtml += `
+                        <div class="product-card">
+                            <div class="product-icon">${item.icon}</div>
+                            <h3>${item.name}</h3>
+                            <div class="price">💰 ${item.price} تومان</div>
+                            ${item.weed ? '<div class="weed-tag"><i class="fas fa-leaf"></i> وید درجه یک</div>' : '<div style="margin:10px;">🔫 گرم‌افزار</div>'}
+                        </div>
+                    `;
+                });
+                shopContainer.innerHTML = shopHtml;
+            }
+            renderShop();
+
+            // تعامل با status toggle
+            const statusSpans = document.querySelectorAll('.status-toggle span');
+            statusSpans.forEach((span, index) => {
+                span.addEventListener('click', function(e) {
+                    if (index === 0) renderMembers('online');
+                    else if (index === 1) renderMembers('offline');
+                    else renderMembers('all');
+                });
+            });
+            // همه اعضا با دوبار کلیک روی هدر برگرده
+            document.querySelector('.section-title').addEventListener('dblclick', function() {
+                renderMembers('all');
+            });
+
+            // ذخیره نوت (نمایشی)
+            document.querySelector('.note-box .btn-neon').addEventListener('click', function() {
+                const noteText = document.querySelector('.note-box textarea').value;
+                if (noteText.trim() !== '') {
+                    alert('یادداشت رهبر ذخیره شد: ' + noteText);
+                } else {
+                    alert('یادداشت خالی است!');
+                }
+            });
+        })();
+    </script>
+    <!-- اضافه کردن آیکون Weed وضوح بیشتر -->
+    <style>
+        /* بهبودهای لحظه‌ای */
+        .shop-grid { grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); }
+        .product-icon { font-size: 4rem; }
+        .online i, .offline i { font-size: 0.8rem; margin-left: 5px; }
+        .status-toggle span { cursor: pointer; background: #28213b; padding: 8px 25px; border-radius: 40px; border: 1px solid #a25eff; }
+        .member-card { cursor: pointer; }
+        .member-grid { margin-bottom: 30px; }
+    </style>
+</body>
+</html>
